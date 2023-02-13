@@ -1,0 +1,4 @@
+p.required:after {
+content: " *";
+color: red;
+}

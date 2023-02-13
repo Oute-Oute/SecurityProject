@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import App from './App.vue';
+import router from './router';
 import firebaseApp from './plugins/firebase';
 // import { initializeApp } from "firebase/app";
 // import { getDatabase } from "firebase/database";
@@ -18,4 +19,6 @@ import firebaseApp from './plugins/firebase';
 // const db=getDatabase();
 //console.log(db)
 
-createApp(App).mount('#app');
+export const app=createApp(App)
+app.use(router)
+app.mount('#app');
