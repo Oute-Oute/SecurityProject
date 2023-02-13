@@ -1,0 +1,52 @@
+<template>
+    <div>
+        <nav>
+            <router-link to="/"> Home </router-link> |
+            <router-link to="/feed"> Feed </router-link> |
+            <span v-if="isLoggedIn">
+                <button @click="signOutButton">Logout</button>
+            </span>
+            <span v-else>
+                <router-link to="/register"> Register </router-link> |
+                <router-link to="/sign-in"> Login </router-link>
+            </span>
+        </nav>
+        <router-view />
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'MenuComp'
+}
+</script>
+<script setup>
+import { ref, watchEffect } from 'vue' // used for conditional rendering
+import { useRouter } from 'vue-router'
+import { getAuth, onAuthStateChanged,signOut } from '@firebase/auth';
+const router = useRouter()
+
+const isLoggedIn = ref(true)
+// runs after firebase is initialized
+const auth= getAuth()
+onAuthStateChanged(auth,function (user) {
+    if (user) {
+        isLoggedIn.value = true // if we have a user
+    } else {
+        isLoggedIn.value = false // if we do not
+    }
+})
+const signOutButton = () => {
+    const auth = getAuth()
+    signOut(auth).then(() => {
+        // Sign-out successful.
+    }).catch((error) => {
+        // An error happened.
+    });
+    router.push('/')
+}
+</script>
+
+<style scoped>
+@import "../assets/style/menu.css";
+</style>
