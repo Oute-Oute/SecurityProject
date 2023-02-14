@@ -1,18 +1,4 @@
-a,a:visited,a:hover{
-    color: #323e4e;
-    text-decoration: none;
-    font-size: 1.2em;
-    font-weight: 600;
-    padding: 0 10px;
-    transition: all 0.3s ease-in-out;
-}
-
-a:hover{
-    text-shadow: 5px 2px 5px rgb(124, 124, 124);
-    text-decoration: none;
-}
-
-button{
+.menu-item,.menu-item:visited,.menu-item:hover{
     color: #323e4e;
     text-decoration: none;
     font-size: 1.2em;
@@ -22,8 +8,8 @@ button{
     background: none;
     border: none;
 }
-button:hover{
-    color: #323e4e;
+
+.menu-item:hover{
     text-shadow: 5px 2px 5px rgb(124, 124, 124);
     text-decoration: none;
 }

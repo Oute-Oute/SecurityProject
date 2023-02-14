@@ -1,17 +1,17 @@
 <template>
     <div>
         <nav>
-            <router-link to="/"> Home </router-link> |
-            <router-link to="/feed"> Feed </router-link> |
+            <router-link class="menu-item" to="/"> Home </router-link> |
+            <router-link class="menu-item" to="/feed"> Feed </router-link> |
             <span v-if="isLoggedIn">
-                <button @click="signOutButton">Logout</button>
+                <button class="menu-item" @click="signOutButton">Logout</button>
             </span>
             <span v-else>
-                <router-link to="/register"> Register </router-link> |
-                <router-link to="/sign-in"> Login </router-link>
+                <router-link class="menu-item" to="/register"> Register </router-link> |
+                <router-link class="menu-item" to="/sign-in"> Login </router-link>
             </span>
         </nav>
-        <router-view />
+        <router-view/>
     </div>
 </template>
 
@@ -20,6 +20,7 @@ export default {
     name: 'MenuComp'
 }
 </script>
+
 <script setup>
 import { ref, watchEffect } from 'vue' // used for conditional rendering
 import { useRouter } from 'vue-router'
