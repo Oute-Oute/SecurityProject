@@ -10,12 +10,10 @@ const firebaseConfig = {
     storageBucket: "securityprojectdi5tb.appspot.com",
     messagingSenderId: "878316006275",
     appId: "1:878316006275:web:106258acce3148665de4b6"
-};
+    };
 let firebaseApp;
 firebaseApp=initializeApp(firebaseConfig);
 export const auth=getAuth();
 const db=getDatabase();
-console.log(db)
-console.log(auth)
 
 export default firebaseApp
