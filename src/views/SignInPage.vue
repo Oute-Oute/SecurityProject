@@ -3,7 +3,7 @@
     <p class="required"><input type="text" placeholder="Email" v-model="email" /></p>
     <p class="required"><input type="password" placeholder="Password" v-model="password" /></p>
     <p v-if="errMsg">{{ errMsg }}</p>
-    <p><button @click="signIn">Submit</button></p>
+    <p><button class="button is-white" @click="signIn">Submit</button></p>
 </template>
 
 <script setup>

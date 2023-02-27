@@ -1,5 +1,5 @@
 <template>
-    <h1>Create an Account</h1>
+    <h1 class="h1-size">Create an Account</h1>
     <p class="required"><input type="text" placeholder="Email" v-model="email" required /></p>
     <p class="required"><input type="password" placeholder="Password" v-model="password" required /></p>
     <p class="required"><input type="password" placeholder="Confirm Password" v-model="confirmPassword" required /></p>
@@ -13,11 +13,11 @@
         <p v-if="errMsg">{{ errMsg }}</p>
     </div>
 
-    <p><button @click="register">Submit</button></p>
+    <p><button class="button is-white" @click="register">Submit</button></p>
 </template>
 <script setup>
 import { ref } from 'vue';
-import firebaseApp from '../plugins/firebase.js';
+import firebaseApp from '../firebase/index.js';
 import { useRouter } from 'vue-router'; // import router
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
