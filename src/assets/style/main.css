@@ -1,5 +1,3 @@
-
-
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -7,17 +5,58 @@
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+    overflow: auto;
 }
 
-h1{
+h1 {
     font-size: 2em;
     font-weight: 600;
     color: rgb(113, 113, 113);
 }
 
-input{
+input {
     border-radius: 20px;
     border-color: rgb(113, 113, 113);
     border-width: 1px;
-    margin : 0.5%;
+    margin: 0.5%;
+}
+
+button {
+    font-family: Avenir,
+        Helvetica,
+        Arial,
+        sans-serif;
+    ;
+}
+
+.textarea {
+    font-family: Avenir,
+        Helvetica,
+        Arial,
+        sans-serif;
+    min-width: 0px;
+    font-size: small;
+    height: fit-content;
+    width: 250px;
+    border-radius: 20px;
+    border-color: rgb(113, 113, 113);
+    outline: none;
+    border-width: 1px;
+    resize: none;
+}
+
+.textarea:active {
+    border-color: rgb(113, 113, 113);
+    border-width: 1px;
+    border-radius: 20px;
+    outline: black
+}
+
+.textarea::placeholder {
+    font-family: Avenir,
+        Helvetica,
+        Arial,
+        sans-serif;
+    font-size: small;
+    color: rgb(113, 113, 113);
 }

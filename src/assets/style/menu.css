@@ -1,4 +1,6 @@
-.menu-item,.menu-item:visited,.menu-item:hover{
+.menu-item,
+.menu-item:visited,
+.menu-item:hover {
     color: #323e4e;
     text-decoration: none;
     font-size: 1.2em;
@@ -7,9 +9,10 @@
     transition: all 0.3s ease-in-out;
     background: none;
     border: none;
+    cursor: pointer;
 }
 
-.menu-item:hover{
+.menu-item:hover {
     text-shadow: 5px 2px 5px rgb(124, 124, 124);
     text-decoration: none;
 }
