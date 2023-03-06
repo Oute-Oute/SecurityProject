@@ -11,7 +11,7 @@
                 <router-link class="menu-item" to="/sign-in"> Login </router-link>
             </span>
         </nav>
-        <router-view/>
+        <router-view />
     </div>
 </template>
 
@@ -24,13 +24,13 @@ export default {
 <script setup>
 import { ref, watchEffect } from 'vue' // used for conditional rendering
 import { useRouter } from 'vue-router'
-import { getAuth, onAuthStateChanged,signOut } from '@firebase/auth';
+import { getAuth, onAuthStateChanged, signOut } from '@firebase/auth';
 const router = useRouter()
 
 const isLoggedIn = ref(true)
 // runs after firebase is initialized
-const auth= getAuth()
-onAuthStateChanged(auth,function (user) {
+const auth = getAuth()
+onAuthStateChanged(auth, function (user) {
     if (user) {
         isLoggedIn.value = true // if we have a user
     } else {
