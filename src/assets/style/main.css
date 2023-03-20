@@ -60,3 +60,7 @@ button {
     font-size: small;
     color: rgb(113, 113, 113);
 }
+
+.cursor {
+    cursor: pointer;
+}

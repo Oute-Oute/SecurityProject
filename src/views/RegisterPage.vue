@@ -17,7 +17,6 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import firebaseApp from '../firebase';
 import { useRouter } from 'vue-router'; // import router
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
