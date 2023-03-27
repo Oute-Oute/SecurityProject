@@ -16,8 +16,12 @@ const router = createRouter({
         },
         {
             path: "/feed",
-            component: () => import("../views/FeedPage.vue"),
+            component: () => import("../components/FeedPage.vue"),
         },
+        {
+            path: "/:catchAll(.*)",
+            component: () => import("../views/PageNotFound.vue")
+        }
     ],
 });
 export default router;

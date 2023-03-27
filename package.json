@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "css-build": "node-sass --omit-source-map-url sass/mystyles.scss css/mystyles.css",
+    "css-build": "node-sass --omit-source-map-url css/bulma.scss",
     "css-watch": "npm run css-build -- --watch",
     "start": "npm run css-watch"
   },
@@ -14,6 +14,7 @@
     "bulma": "^0.9.4",
     "chai": "^4.3.7",
     "core-js": "^3.8.3",
+    "crypto-js": "^4.1.1",
     "firebase": "^9.17.1",
     "mocha": "^10.2.0",
     "vue": "^3.2.13",

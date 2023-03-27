@@ -17,11 +17,12 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import firebaseApp from '../firebase/index.js';
 import { useRouter } from 'vue-router'; // import router
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
-require('firebase/auth');
+import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
+const AESKey = "oute"
+let db = getFirestore();
+const CryptoJS = require("crypto-js")
 const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
@@ -42,24 +43,30 @@ const register = () => {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
+                const users = collection(db, "users");
+                let hash = CryptoJS.AES.encrypt(password.value, AESKey).toString()
+                setDoc(doc(users, user.uid), {
+                    password: hash,
+                    email: email.value
+                });
+
                 router.push('/feed') // redirect to feed
-                // ...
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 switch (errorCode) {
                     case 'auth/email-already-in-use':
-                        errMsg('Email already in use')
+                        errMsg.value = 'Email is already in use'
                         break
                     case 'auth/invalid-email':
-                        errMsg('Email is not valid')
+                        errMsg.value = 'Email is invalid'
                         break
                     case 'auth/weak-password':
-                        errMsg('Password is not strong enough')
+                        errMsg.value = 'Password is too weak'
                         break
                     default:
-                        errMsg('Error: ' + errorMessage + '')
+                        errMsg.value = 'Error: ' + errorMessage + ' Please try again'
                         break;
                 }
                 // ..
