@@ -1,7 +1,7 @@
 <template>
     <router-view />
     <div class="save-btn">
-        <button class="modal-button" @click="showModal = true">New Show</button>
+        <button class="modal-button" @click="showModal()">New Show</button>
         <input type="text" placeholder="Search" v-model="filter" />
 
     </div>
@@ -38,9 +38,9 @@
                 <td :id='show.id + "seen"' class="cursor" v-html="show.seen" @click="changeSeen(show)"></td>
                 <td v-html="show.wishlist" class="cursor" @click="changeWishlist(show)"></td>
                 <td>
-                    <button class="button is-primary">Edit</button>
+                    <button class="button is-primary" @click="editShow(show)">Edit</button>
                     <br>
-                    <button class="button is-danger">Delete</button>
+                    <button class="button is-danger" @click="deleteShow(show)">Delete</button>
                 </td>
             </tr>
         </tbody>
@@ -49,13 +49,13 @@
         <button class="button is-primary" @click="prevPage">Previous</button>&nbsp;
         <button class="button is-primary" @click="nextPage">Next</button>
     </p>
-    <NewShow v-show="showModal" @close-modal="showModal = false" />
+    <NewShow v-show="modal" :show="isShow" @close-modal="modal = false" />
 </template>
 
 
 <script>
 import NewShow from './NewShow.vue';
-import { getFirestore, collection, getDocs, setDoc, doc } from "firebase/firestore";
+import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 export default {
     name: 'App',
@@ -73,6 +73,7 @@ export default {
         const pageSize = 3;
         const currentPage = 1;
         const filter = '';
+        let isShow = [] | undefined
         return {
             auth: auth,
             db: db,
@@ -83,10 +84,15 @@ export default {
             currentSort: currentSort,
             currentSortDir: currentSortDir,
             shows: shows,
-            showModal: false
+            modal: false,
+            isShow: isShow
         }
     },
     methods: {
+        showModal() {
+            this.isShow = undefined;
+            this.modal = true;
+        },
         changeSeen(show) {
             console.log(this.auth.currentUser.uid)
             if (show.seen == "✅") {
@@ -148,6 +154,7 @@ export default {
                 this.shows[this.shows.length - 1].id = doc.id;
             });
             this.shows.forEach((show) => {
+                show.id = show["id"].toString();
                 show.directorString = show["director"].toString().replaceAll(",", ", ");
                 show.castString = show["cast"].toString().replaceAll(",", ", ");
                 show.countryString = show["country"].toString().replaceAll(",", ", ");
@@ -167,6 +174,43 @@ export default {
                     show.ratingStars += "⭐";
                 }
             })
+            const showsUsersRef = collection(db, "userShows");
+            const querySnapshot2 = await getDocs(showsUsersRef);
+            querySnapshot2.forEach((doc) => {
+                if (doc.data().userId == this.auth.currentUser.uid) {
+                    this.shows.forEach((show) => {
+                        if (show.id == doc.data().showId) {
+                            if (doc.data().seen) {
+                                show.seen = "✅";
+                            } else {
+                                show.seen = "❌";
+                            }
+                            if (doc.data().wishlist) {
+                                show.wishlist = "❤️";
+                            } else {
+                                show.wishlist = "🤍";
+                            }
+                        }
+                    })
+                }
+            })
+        },
+        editShow(show) {
+            console.log("edit show" + show);
+            //update v-model in NewShow
+            this.isShow = show
+
+            this.modal = true;
+
+        },
+        deleteShow(show) {
+            console.log("delete show" + show);
+            const db = getFirestore();
+            const showsRef = collection(db, "shows");
+            const showsUsersRef = collection(db, "userShows");
+            deleteDoc(doc(showsRef, show.id));
+            deleteDoc(doc(showsUsersRef, this.auth.currentUser.uid + show.id));
+            this.shows = this.shows.filter((s) => s.id !== show.id);
         },
         sort: function (s) {
             //if s == current sort, reverse
@@ -192,7 +236,9 @@ export default {
                 if (a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
                 return 0;
             }).filter(row => {
+                console.log(row)
                 const type = row.type.toLowerCase();
+                console.log(type)
                 const title = row.title.toLowerCase();
                 const director = row.director.toString().toLowerCase();
                 const description = row.description.toLowerCase();

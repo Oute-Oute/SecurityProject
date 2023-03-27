@@ -20,6 +20,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router'; // import router
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
+const AESKey = "oute"
 let db = getFirestore();
 const CryptoJS = require("crypto-js")
 const email = ref('')
@@ -43,7 +44,7 @@ const register = () => {
                 // Signed in 
                 const user = userCredential.user;
                 const users = collection(db, "users");
-                let hash = CryptoJS.AES.encrypt(password.value, this.AESKey).toString()
+                let hash = CryptoJS.AES.encrypt(password.value, AESKey).toString()
                 setDoc(doc(users, user.uid), {
                     password: hash,
                     email: email.value

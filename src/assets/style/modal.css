@@ -91,6 +91,26 @@ p {
     -webkit-appearance: none;
 }
 
+.rating .rate1 {
+    --value: 1;
+}
+
+.rating .rate2 {
+    --value: 2;
+}
+
+.rating .rate3 {
+    --value: 3;
+}
+
+.rating .rate4 {
+    --value: 4;
+}
+
+.rating .rate5 {
+    --value: 5;
+}
+
 [dir="rtl"] .rating {
     --dir: left;
 }
