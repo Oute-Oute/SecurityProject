@@ -2,7 +2,7 @@
     <div>
         <nav>
             <router-link class="menu-item" to="/"> Home </router-link> |
-            <router-link class="menu-item" to="/feed"> Feed </router-link> |
+            <router-link class="menu-item" to="/wishlist"> Wishlist </router-link> |
             <span v-if="isLoggedIn">
                 <button class="menu-item" @click="signOutButton">Logout</button>
             </span>
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <script setup>
-import { ref, watchEffect } from 'vue' // used for conditional rendering
+import { ref } from 'vue' // used for conditional rendering
 import { useRouter } from 'vue-router'
 import { getAuth, onAuthStateChanged, signOut } from '@firebase/auth';
 const router = useRouter()
