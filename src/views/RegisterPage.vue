@@ -1,8 +1,9 @@
 <template>
     <h1 class="h1-size">Create an Account</h1>
-    <p class="required"><input type="text" placeholder="Email" v-model="email" required /></p>
-    <p class="required"><input type="password" placeholder="Password" v-model="password" required /></p>
-    <p class="required"><input type="password" placeholder="Confirm Password" v-model="confirmPassword" required /></p>
+    <p class="required"><input id="mail" type="text" placeholder="Email" v-model="email" required /></p>
+    <p class="required"><input id="password" type="password" placeholder="Password" v-model="password" required /></p>
+    <p class="required"><input id="confirm" type="password" placeholder="Confirm Password" v-model="confirmPassword"
+            required /></p>
     <div class="errorRegex">
         <p v-if="password.length < 8">Password must be at least 8 characters</p>
         <p v-if="password.search(/(?=.*?[a-z])/)">Password must contains at least one letter</p>
@@ -13,7 +14,7 @@
         <p v-if="errMsg">{{ errMsg }}</p>
     </div>
 
-    <p><button class="button is-white" @click="register">Submit</button></p>
+    <p><button class="button is-white" id="register" @click="register">Submit</button></p>
 </template>
 <script setup>
 import { ref } from 'vue';
@@ -49,8 +50,7 @@ const register = () => {
                     password: hash,
                     email: email.value
                 });
-
-                router.push('/feed') // redirect to feed
+                router.push('/') // redirect to home
             })
             .catch((error) => {
                 const errorCode = error.code;

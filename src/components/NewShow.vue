@@ -33,8 +33,8 @@
                 <input class="rating" :style="show ? '--value :' + show['rating'] : ''" max="5"
                     oninput="this.style.setProperty('--value', this.value)" id="rating" step="1" type="range" value="3" />
 
-                <button v-if="!show" class="modal-button" @click="saveShow()">Save</button>
-                <button v-else class="modal-button" @click="editShow()">Edit</button>
+                <button v-if="!show" id="saveShow" class="modal-button" @click="saveShow()">Save</button>
+                <button v-else id="editShow" class="modal-button" @click="editShow()">Edit</button>
 
 
             </div>

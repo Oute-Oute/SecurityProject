@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <MenuComp/>
+    <MenuComp />
   </div>
 </template>
 
-<script>
+<script >
 import MenuComp from './components/MenuComp.vue';
 
 export default {
   name: 'App',
   components: {
     MenuComp
-}
+  }
 }
 </script>
 

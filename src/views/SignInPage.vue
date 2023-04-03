@@ -1,9 +1,9 @@
 <template>
     <h1>Login to Your Account</h1>
-    <p class="required"><input type="text" placeholder="Email" v-model="email" /></p>
-    <p class="required"><input type="password" placeholder="Password" v-model="password" /></p>
+    <p class="required"><input type="text" id="mail" placeholder="Email" v-model="email" /></p>
+    <p class="required"><input type="password" id="password" placeholder="Password" v-model="password" /></p>
     <p v-if="errMsg">{{ errMsg }}</p>
-    <p><button class="button is-white" @click="signIn">Submit</button></p>
+    <p><button class="button is-white" id="connect" @click="signIn">Submit</button></p>
 </template>
 
 <script setup>
@@ -18,7 +18,7 @@ const signIn = () => { // we also renamed this method
     const auth = getAuth()
     signInWithEmailAndPassword(auth, email.value, password.value)
         .then((data) => {
-            router.push('/feed') // redirect to the feed
+            router.push('/') // redirect to the feed
         })
         .catch(error => {
             switch (error.code) {

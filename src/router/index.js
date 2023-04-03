@@ -21,7 +21,7 @@ const router = createRouter({
             name: "wishlist",
             path: "/wishlist",
             component: () => import("../components/FeedPage.vue"),
-            props: { wishlist: true },
+            props: { wishlistProp: true },
         },
         {
             name: "404",

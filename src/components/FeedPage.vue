@@ -1,7 +1,7 @@
 <template>
     <router-view />
     <div class="save-btn">
-        <button class="modal-button" @click="showModal()">New Show</button>
+        <button id="addShow" class="modal-button" @click="showModal()">New Show</button>
         <input type="text" placeholder="Search" v-model="filter" />
 
     </div>
@@ -38,9 +38,9 @@
                 <td :id='show.id + "seen"' class="cursor" v-html="show.seen" @click="changeSeen(show)"></td>
                 <td v-html="show.wishlist" class="cursor" @click="changeWishlist(show)"></td>
                 <td>
-                    <button class="button is-primary" @click="editShow(show)">Edit</button>
+                    <button :id="'edit' + show.id" class="button is-primary" @click="editShow(show)">Edit</button>
                     <br>
-                    <button class="button is-danger" @click="deleteShow(show)">Delete</button>
+                    <button :id="'delete' + show.id" class="button is-danger" @click="deleteShow(show)">Delete</button>
                 </td>
             </tr>
         </tbody>
@@ -63,7 +63,10 @@ export default {
     //get the params from the router
     components: {
         NewShow,
-
+    },
+    props: {
+        show: Object,
+        wishlistProp: Boolean
     },
     data() {
         const auth = getAuth();

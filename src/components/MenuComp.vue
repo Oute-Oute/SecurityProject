@@ -1,14 +1,14 @@
 <template>
     <div>
         <nav>
-            <router-link class="menu-item" to="/"> Home </router-link> |
-            <router-link class="menu-item" to="/wishlist"> Wishlist </router-link> |
+            <router-link id="home-menu" class="menu-item" to="/"> Home </router-link> |
+            <router-link id="wish-menu" class="menu-item" to="/wishlist"> Wishlist </router-link> |
             <span v-if="isLoggedIn">
-                <button class="menu-item" @click="signOutButton">Logout</button>
+                <button id="logout-menu" class="menu-item" @click="signOutButton">Logout</button>
             </span>
             <span v-else>
-                <router-link class="menu-item" to="/register"> Register </router-link> |
-                <router-link class="menu-item" to="/sign-in"> Login </router-link>
+                <router-link id="register-menu" class="menu-item" to="/register"> Register </router-link> |
+                <router-link id="login-menu" class="menu-item" to="/sign-in"> Login </router-link>
             </span>
         </nav>
         <router-view />
