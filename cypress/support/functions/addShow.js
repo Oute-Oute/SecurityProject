@@ -6,7 +6,7 @@ export function add(title, description, type, director, cast, country, release_y
     if (type === 'movie') {
         cy.get('input[value="movie"]').check()
     } else {
-        cy.get('input[value="series"]').uncheck()
+        cy.get('input[value="series"]').check()
     }
     cy.get('input[id="director"]').type(director)
     cy.get('input[id="cast"]').type(cast)
@@ -15,4 +15,5 @@ export function add(title, description, type, director, cast, country, release_y
     cy.get('input[id="duration"]').type(duration)
     cy.get('input[id="genre"]').type(genre)
     cy.get('input[id="rating"]').type(rating)
+    cy.get('button[id="saveShow"]').click()
 }

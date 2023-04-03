@@ -8,6 +8,7 @@ describe('template spec', () => {
   it('passes', () => {
     connection(user, password)
     add('titleTest', 'descriptionTest', 'movie', 'directorTest', 'castTest', 'countryTest', 2000, 'durationTest', 'genreTest', 3)
+
     deconnection()
   })
 })
