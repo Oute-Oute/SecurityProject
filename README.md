@@ -1,9 +1,12 @@
-# security-project
+# tp-securite
 
 ## Project setup
+Clone project : ``https://github.com/Oute-Oute/SecurityProject``
+then run : 
 ```
 npm install
 ```
+to install all dependencies.
 
 ### Compiles and hot-reloads for development
 ```
@@ -15,10 +18,6 @@ npm run serve
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+### Project Deployed on Netlify :
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+https://projectsecuritytb.netlify.app/

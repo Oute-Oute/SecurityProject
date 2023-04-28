@@ -3,22 +3,28 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
+            name: "home",
             path: "/",
-            component: () => import("../views/HomePage.vue"),
+            component: () => import("../components/FeedPage.vue"),
         },
         {
+            name: "register",
             path: "/register",
             component: () => import("../views/RegisterPage.vue"),
         },
         {
+            name: "sign-in",
             path: "/sign-in",
             component: () => import("../views/SignInPage.vue"),
         },
         {
-            path: "/feed",
+            name: "wishlist",
+            path: "/wishlist",
             component: () => import("../components/FeedPage.vue"),
+            props: { wishlist: true },
         },
         {
+            name: "404",
             path: "/:catchAll(.*)",
             component: () => import("../views/PageNotFound.vue")
         }

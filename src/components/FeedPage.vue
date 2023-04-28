@@ -55,10 +55,12 @@
 
 <script>
 import NewShow from './NewShow.vue';
+import { useRoute } from 'vue-router'
 import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 export default {
     name: 'App',
+    //get the params from the router
     components: {
         NewShow,
 
@@ -73,7 +75,9 @@ export default {
         const pageSize = 3;
         const currentPage = 1;
         const filter = '';
+        const route = useRoute()
         let isShow = [] | undefined
+        const wish = false;
         return {
             auth: auth,
             db: db,
@@ -85,7 +89,9 @@ export default {
             currentSortDir: currentSortDir,
             shows: shows,
             modal: false,
-            isShow: isShow
+            isShow: isShow,
+            wish: wish,
+            route: route
         }
     },
     methods: {
@@ -153,22 +159,13 @@ export default {
                 this.shows.push(doc.data());
                 this.shows[this.shows.length - 1].id = doc.id;
             });
+            console.log(this.wish)
             this.shows.forEach((show) => {
                 show.id = show["id"].toString();
                 show.directorString = show["director"].toString().replaceAll(",", ", ");
                 show.castString = show["cast"].toString().replaceAll(",", ", ");
                 show.countryString = show["country"].toString().replaceAll(",", ", ");
                 show.genreString = show["genre"].toString().replaceAll(",", ", ");
-                if (show.seen) {
-                    show.seen = "✅";
-                } else {
-                    show.seen = "❌";
-                }
-                if (show.wishlist) {
-                    show.wishlist = "❤️";
-                } else {
-                    show.wishlist = "🤍";
-                }
                 show.ratingStars = "";
                 for (let i = 0; i < show["rating"]; i++) {
                     show.ratingStars += "⭐";
@@ -185,10 +182,19 @@ export default {
                             } else {
                                 show.seen = "❌";
                             }
-                            if (doc.data().wishlist) {
-                                show.wishlist = "❤️";
-                            } else {
-                                show.wishlist = "🤍";
+                            if (!this.wish) {
+                                if (doc.data().wishlist) {
+                                    show.wishlist = "❤️";
+                                } else {
+                                    show.wishlist = "🤍";
+                                }
+                            }
+                            else {
+                                if (doc.data().wishlist) {
+                                    show.wishlist = "❤️";
+                                } else {
+                                    this.shows = this.shows.filter((s) => s.id !== show.id);
+                                }
                             }
                         }
                     })
@@ -267,6 +273,13 @@ export default {
         },
     },
     beforeMount() {
+        //if url contains wishlist, set wishlist to true
+        if (window.location.href.includes("wishlist")) {
+            this.wish = true;
+        }
+        else {
+            this.wish = false;
+        }
         this.getShows();
     },
 }
