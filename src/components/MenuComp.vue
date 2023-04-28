@@ -1,8 +1,7 @@
 <template>
     <div>
         <nav>
-            <router-link class="menu-item" to="/"> Home </router-link> |
-            <router-link class="menu-item" to="/wishlist"> Wishlist </router-link> |
+            <router-link id="home-menu" class="menu-item" to="/"> Home </router-link> |
             <span v-if="isLoggedIn">
                 <button class="menu-item" @click="signOutButton">Logout</button>
             </span>
