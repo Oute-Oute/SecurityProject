@@ -2,7 +2,6 @@
     <div>
         <nav>
             <router-link id="home-menu" class="menu-item" to="/"> Home </router-link> |
-            <router-link id="wish-menu" class="menu-item" to="/wishlist"> Wishlist </router-link> |
             <span v-if="isLoggedIn">
                 <button id="logout-menu" class="menu-item" @click="signOutButton">Logout</button>
             </span>
